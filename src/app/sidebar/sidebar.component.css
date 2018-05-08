@@ -1,0 +1,9 @@
+.fa {
+    font-size: 1.3em;
+}
+ .nav  > li:first-child {
+    border-top: 2px solid #fff;
+  }
+.nav  > li{
+      border-bottom: 2px solid #fff;
+}

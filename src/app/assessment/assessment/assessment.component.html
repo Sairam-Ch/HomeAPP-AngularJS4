@@ -1,0 +1,354 @@
+<div class="container-fluid top-padding">
+  <div class="row" [hidden]="!assesdetails">
+    <fieldset class="assessDetailsFieldSet">
+      <legend class="legendStyle ">Assessment Details</legend>
+      <table class="col-md-12">
+        <tr>
+          <td>
+            <div  class="pull-left col-xs-12 col-sm-6 col-md-6">
+              <table class="col-xs-12  col-md-12 ">
+                <tr>
+                  <td class="left-sideBox col-xs-5 col-md-4">Course</td>
+                  <td class="right-sideBox">
+                    <select class="select-box">
+                      <option value=""  >Math</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="left-sideBox col-xs-5 col-md-4">Grade</td>
+                  <td class="right-sideBox">
+                    <select class="select-box">
+                      <option value=""  >3</option>
+
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td  class="left-sideBox col-xs-5 col-md-4">Assessment Name</td>
+                  <td class="right-sideBox">
+                    <input type="text" class="input-border"  placeholder="Enter Assessment Name" >
+                  </td>
+                </tr>
+                <tr>
+                  <td class="left-sideBox col-xs-5 col-md-4" >Pin Required</td>
+                  <td class="right-sideBox">
+                    <input class="assessCheck" type="checkbox"/><span class="assessCheckSpan"><label class="cutom-label" for="no">Yes</label></span>
+                  </td>
+                </tr>
+                <tr >
+                  <td class="left-sideBox col-xs-5 col-md-4">Target</td>
+                  <td class="right-sideBox">
+                    <select class="select-box">
+                      <!--<option ng-if="noSchools" >Schools not available</option>-->
+                      <option value="">All</option>
+                    </select>
+                  </td>
+                </tr>
+
+
+              </table>
+            </div>
+            <div  class="pull-left col-xs-12 col-sm-6 col-md-6 align-top">
+              <table class=" col-xs-12 col-md-12 " >
+                <tr>
+                  <td class="left-sideBox col-xs-5 col-md-4">Start Date</td>
+                  <td class="right-sideBox">
+                    <input  type="text" style="width: 91%" class="input-border datepicker">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="left-sideBox col-xs-5 col-md-4">End Date</td>
+                  <td class="right-sideBox">
+                    <input  type="text" style="width: 91%" class="input-border datepicker1" >
+                  </td>
+                </tr>
+                <tr>
+                  <td class="left-sideBox col-xs-5 col-md-4">Start Time</td>
+                  <td class="right-sideBox">
+                    <input type="text" class="input-border"  placeholder="Select Time" id="startTime">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="left-sideBox col-xs-5 col-md-4">End Time</td>
+                  <td class="right-sideBox">
+                    <input  type="text" class="input-border" placeholder="Select Time" id="endTime" />
+                  </td>
+                </tr>
+                <tr>
+                  <td class="left-sideBox col-xs-5 col-md-4">Type</td>
+                  <td class="right-sideBox">
+                    <select class="select-box">
+                      <option value="formal">Formal</option>
+                      <option value="practice">Practice</option>
+                    </select>
+                  </td>
+                </tr>
+
+                <tr >
+                  <td class="left-sideBox col-xs-5 col-md-4" >Retest</td>
+                  <td class="right-sideBox">
+                    <input class="assessCheck" type="checkbox" /><span class="assessCheckSpan"><label class="cutom-label" for="no">Yes</label></span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="left-sideBox col-xs-5 col-md-4" >Show Result</td>
+                  <td class="right-sideBox">
+                    <input class="assessCheck" type="checkbox"/><span class="assessCheckSpan"><label class="cutom-label"  for="no">Yes</label></span>
+                  </td>
+                </tr>
+
+              </table>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </fieldset>
+  </div >
+
+  <div class="row" *ngIf="filterSection">
+    <fieldset>
+      <legend class="legendStyle ">Filter Selection</legend>
+      <table class="col-md-12">
+        <tr>
+          <td>
+            <div  class="pull-left col-xs-12 col-sm-6 col-md-6">
+              <table class="col-xs-12  col-md-12 ">
+                <tr>
+                  <td class="left-sideBox col-xs-5 col-md-4">Assessment</td>
+                  <td class="right-sideBox">
+                    <select class="select-box">
+                      <option value=""  >Selected Question</option>
+                      <option value=""  >Random Question</option>
+                      <option value=""  >Use Template</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="left-sideBox col-xs-5 col-md-4">Strands</td>
+                  <td class="right-sideBox">
+                    <select class="select-box">
+                      <option value=""  >All</option>
+
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td  class="left-sideBox col-xs-5 col-md-4">Expectations</td>
+                  <td class="right-sideBox">
+                    <select class="select-box">
+                      <option value=""  >All</option>
+                    </select>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div  class="pull-left col-xs-12 col-sm-6 col-md-6 align-top">
+              <table class=" col-xs-12 col-md-12 " >
+                <tr>
+                  <td class="left-sideBox col-xs-5 col-md-4">Library</td>
+                  <td class="right-sideBox">
+                    <select class="select-box">
+                      <option value="">Private</option>
+                      <option value="">Public</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="left-sideBox col-xs-5 col-md-4">Type</td>
+                  <td class="right-sideBox">
+                    <select class="select-box">
+                      <option value="">Multiple Choice</option>
+                      <option value=""> Text Input</option>
+                      <option value="">Open Response</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="left-sideBox col-xs-5 col-md-4" >Include Manipulatives</td>
+                  <td class="right-sideBox">
+                    <input class="assessCheck" type="checkbox"/><span class="assessCheckSpan"><label class="cutom-label" for="no">Yes</label></span>
+                  </td>
+                </tr>
+
+              </table>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <div>
+        <button (click)="showQuestionList()" class="btn btn-default pull-right list-btn btn-lg">List</button>
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="row" *ngIf="displayQuestionList" >
+    <fieldset>
+      <legend class="legendStyle ">Question Selections</legend>
+      <div class="question-tab">
+        <table >
+          <tr >
+            <td class="leftBox3" >
+              <input type="checkbox">
+            </td>
+            <td class="leftLabels" >QM001
+            </td>
+            <!--<td class="middleBox3">{{question.type}}</td>-->
+            <!--<td class="middleBox3 cursor" >Text Input</td>-->
+            <td class="middleBox3 cursor" >Multiple Choice</td>
+            <!--<td class="middleBox3 cursor" >Open Response</td>-->
+            <td class="rightBox3 cursor">Add 50+5</td>
+            <td class="manipulative-box"><span ></span></td>
+          </tr>
+        </table>
+      </div>
+      <div>
+        <button class="btn btn-default pull-right list-btn btn-lg" (click)="assignAssessment()">Assign Assessment</button>
+        <button class="btn btn-default pull-right list-btn btn-lg">Next</button>
+        <button class="btn btn-default pull-right list-btn btn-lg">Previous</button>
+      </div>
+    </fieldset>
+  </div>
+
+
+  <div *ngIf="DisplayConfirmDetails">
+    <div class="row" >
+      <fieldset>
+        <legend class="legendStyle ">Confirm Assessment Details</legend>
+        <table class="col-md-12">
+          <tr>
+            <td >
+              <div class=" col-xs-12 col-sm-6 col-md-6">
+                <table class=" col-xs-12 col-md-12 ">
+                  <tr>
+                    <td class="left-sideBox col-xs-5 col-md-4">Course</td>
+                    <td class="right-sideBox notAllow" >
+                      <input  type="text" value="Math" class="notAllow select-role custom-form" readonly>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="left-sideBox col-xs-5 col-md-4">Grade</td>
+                    <td class="right-sideBox notAllow">
+                      <input  type="text" value="3"  class="notAllow select-role custom-form" readonly>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="left-sideBox  col-xs-5 col-md-4">Assessment Name</td>
+                    <td class="right-sideBox notAllow">
+                      <input  type="text"  class="notAllow select-role custom-form" readonly>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class=" col-xs-12 col-sm-6 col-md-6 align-top">
+                <table class=" col-xs-12 col-md-12 ">
+                  <tr>
+                    <td class="left-sideBox  col-xs-5 col-md-4">Start Date</td>
+                    <td class="right-sideBox notAllow">
+                      <input  type="text"  class="notAllow select-role custom-form" readonly>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="left-sideBox  col-xs-5 col-md-4">End Date</td>
+                    <td class="right-sideBox notAllow">
+                      <input  type="text"  class="notAllow select-role custom-form" readonly>
+                    </td>
+                  </tr>
+                  <tr >
+                    <!--ng-model="start_time"-->
+                    <td class="left-sideBox  col-xs-5 col-md-4">Start Time</td>
+                    <td class="right-sideBox notAllow">
+                      <input type="text" class="notAllow custom-form" readonly/>
+                    </td>
+                  </tr>
+                  <tr >
+                    <td class="left-sideBox  col-xs-5 col-md-4" >End Time</td>
+                    <td class="right-sideBox notAllow">
+                      <!--ng-model="end_time"-->
+                      <input type="text" class="notAllow custom-form"   readonly/>
+                    </td>
+                  </tr>
+                  <tr >
+                    <td class="left-sideBox  col-xs-5 col-md-4">PIN</td>
+                    <td class="right-sideBox notAllow">
+                      <input type="text"  class="notAllow select-role custom-form" readonly>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+    </div>
+
+    <div class="row">
+      <p  class="assess-text"> Unselect Questions for Removal:</p>
+      <div >
+        <div  style="background-color: green" class="col-xs-12 col-lg-12 asst-block"  >
+          <div>
+            <div class="assm-strand-title">Measurment</div>
+            <div class=" col-xs-12 col-sm-6 col-lg-6 asst-mainblock" >
+              <div class="asst-block1"> <input class="asst-checkbox" type="checkbox" ></div>
+              <div class="col-xs-5 col-lg-2 asst-block2 cursor-pointer" >QM001</div>
+              <div class="col-xs-6 col-lg-3 asst-block3 " >Add 50+5</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <button class="btn btn-default pull-right list-btn btn-lg">Save</button>
+        <button (click)="back()" class="btn btn-default pull-right list-btn btn-lg" >Back</button>
+        <button (click)="cancel()" class="btn btn-default pull-right list-btn btn-lg">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--<div id="dialog-modal-ass" title="Preview Question">-->
+  <!--<div>-->
+    <!--<div >-->
+      <!--<p >line 1</p>-->
+      <!--<p >line 2</p>-->
+    <!--</div>-->
+
+    <!--<div>-->
+      <!--<img style="display:block;  margin-right:auto;"  />-->
+    <!--</div>-->
+
+    <!--<div >-->
+      <!--<p >Line 3</p>-->
+    <!--</div>-->
+
+    <!--<div>-->
+      <!--<img  />-->
+    <!--</div>-->
+
+    <!--<div >-->
+      <!--<p >Line 4</p>-->
+    <!--</div>-->
+
+    <!--<div>-->
+      <!--<img style="display:block;  margin-right:auto;"  />-->
+    <!--</div>-->
+
+    <!--<div >-->
+      <!--<p >Line 5</p>-->
+
+      <!--<p >Line 6</p>-->
+    <!--</div>-->
+
+    <!---->
+
+
+  <!--</div>-->
+  <!--<div ng-if="question1.board.correctanswer">-->
+    <!--<p style="font-weight: bold" class="padding-bottom-look">Correct Answer : {{question1.board.correctanswer }} </p>-->
+    <!--<img style="display:block;  margin-right:auto;" class="neoansimg" ngf-src="question1.board.correctanswerimage | imagefilter" />-->
+  <!--</div>-->
+<!--</div>-->
+
+

@@ -1,0 +1,19 @@
+.glyphicon-ring {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  color: white;
+  display: inline-table;
+  text-align: center;
+  top: -2px;
+  align-items: right;
+  float: left;
+  background: #444444;
+  position: relative;
+}
+.signin{
+	text-align: center;font-size: 18px;font-weight: bold;color: black;
+}
+.loginBtn{
+	background: #696969;color: white;font-size: 15px;font-weight: bold;padding-right: 30px;
+}

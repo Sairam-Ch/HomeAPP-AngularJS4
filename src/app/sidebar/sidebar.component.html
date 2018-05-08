@@ -1,0 +1,29 @@
+	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+			<ul class="nav menu">
+				<li routerLinkActive="active" data-toggle="collapse" data-target="#sidebar-collapse" *ngFor="let Sidebar of SidebarList" >
+					<a routerLink="{{Sidebar.path}}"><img src="{{Sidebar.img}}">&nbsp; {{Sidebar.title}}</a>
+				</li>
+			<!-- 	<li  routerLinkActive="active" data-toggle="collapse" data-target="#sidebar-collapse"><a routerLink="/assessment"><img src="assets/img/assessment_icon.png">&nbsp;Assessments</a></li>
+				<li  routerLinkActive="active" data-toggle="collapse" data-target="#sidebar-collapse"><a routerLink="/history">
+					<img src="assets/img/history.png">&nbsp; History</a></li>
+				<li  routerLinkActive="active" data-toggle="collapse" data-target="#sidebar-collapse"><a routerLink="/scorecard"><img src="assets/img/target.png">&nbsp; Scorecard</a></li> -->
+				<!-- <li class="parent "><a data-toggle="collapse" href="#sub-item-1">
+					<em class="fa fa-file-o">&nbsp;</em> Pages <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><i class="fa fa-plus"></i></span>
+					</a>
+					<ul class="children collapse" id="sub-item-1">
+						<li><a class="" href="gallery.html">
+							Gallery
+						</a></li>
+						<li><a class="" href="search.html">
+							Search
+						</a></li>
+						<li><a class="" href="login.html">
+							Login
+						</a></li>
+						<li><a class="" href="error.html">
+							Error 404
+						</a></li>
+					</ul>
+				</li> -->
+			</ul>
+		</div><!--/.sidebar-->
