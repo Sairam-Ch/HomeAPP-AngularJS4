@@ -21,8 +21,8 @@
       "styles": [
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "../lib/font-awesome/css/font-awesome.min.css",
-         "../node_modules/jquery-ui-themes/themes/overcast/jquery-ui.css",
-         "../node_modules/timepicker/jquery.timepicker.css",
+        "../node_modules/jquery-ui-themes/themes/overcast/jquery-ui.css",
+        "../lib/timepicker/jquery.timepicker.css",
         "styles.css"
       ],
       "scripts": [

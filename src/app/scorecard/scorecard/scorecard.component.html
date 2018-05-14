@@ -1,3 +1,108 @@
 <h1>
   scorecard works!
 </h1>
+<!-- <div class="row">
+  <ui-carousel [infinite]="false" [fade]="false" [speed]="200">
+    <ui-carousel-item *ngFor="let meeting of meetingList ; let index=index; let odd=odd; let even=even;">
+      	<div class="col-md-6" >
+        <div style="background:#2980b9" class="text" *ngIf="even">{{meeting}}</div>
+      </div>
+      <div class="col-md-6" >
+        <div style="background:#2ecc71" class="text" *ngIf="odd">{{meeting}}</div>
+      </div>
+    </ui-carousel-item>
+  </ui-carousel>
+</div> -->
+<!-- 
+<div *ngFor="let k of objectKeys(scorecard)">
+    <span>{{k}}</span>
+</div> -->
+<!-- <div class="row">
+  <ui-carousel [infinite]="false" [fade]="false" [speed]="200">
+  	<div *ngFor="let item of myArray; let i = index; let even = even;">
+    <ui-carousel-item *ngIf="even">
+      	<div class="col-md-6">
+        <div style="background:#2980b9" class="text">{{ myArray[i] }}</div>
+      </div>
+      <div class="col-md-6">
+        <div style="background:#2ecc71" class="text">{{ myArray[i+1] }}</div>
+      </div>
+    </ui-carousel-item>
+</div>
+  </ui-carousel>
+</div> -->
+<div class="row">
+  <ui-carousel [infinite]="false" [fade]="false" [speed]="200" [height]="'1400px'" >
+    <div *ngFor="let item of scorecard1; let i = index; let even = even;">
+      <ui-carousel-item *ngIf="even" >
+        <div class="col-md-6" style="border: 1px solid black;" [ngStyle]="MainColor(i)">
+          <h2 [ngStyle]="MainColor(i)">{{getMainKey(i)}}</h2>
+          <hr>
+          <div *ngFor="let details of getObjectinArray(scorecard1[i]);let di = index;" style="background-color: #fff;margin: -10px;">
+          	<h3 style="height: 30px;background-color: #ccc;">{{GetKey(i,di)}}</h3>
+            <div *ngFor="let detail of details;" >
+              <div *ngFor="let de of detail;let last = last" style="padding: 5px;">
+                <a href="{{de.url}}" target="_blank">{{de.specval}}</a>
+                <img src="{{de.src}}" style="float: right;">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6" style="border: 1px solid black;" [ngStyle]="MainColor1(i)">
+        	<h2  [ngStyle]="MainColor1(i)">{{getMainKey1(i)}}</h2>
+          	<hr>
+           <div *ngFor="let details of getObjectinArray(scorecard1[i+1]);let d = index;" style="background-color: #fff;margin: -10px;">
+           	<h3 style="height: 30px;background-color: #ccc;">{{GetKey1(i,d)}}</h3>
+            <div *ngFor="let detail of details;">
+              <div *ngFor="let de of detail;" style="padding: 5px;">
+                <a href="{{de.url}}" target="_blank">{{de.specval}}</a>
+                <img src="{{de.src}}" style="float: right;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </ui-carousel-item>
+    </div>
+  </ui-carousel>
+</div>
+<br>
+<br>
+<!-- <table>
+  <div *ngFor="let property of objectKeys(scorecard);let i = index; let even = even;">
+    <tr>
+      <th>{{property}}</th>
+    </tr>
+    <div *ngFor="let item of objectKeys(scorecard[property])">
+      <tr>
+        <h2>{{item}}:</h2>
+      </tr>
+      <div *ngFor="let details of objectKeys(scorecard[property][item])">
+        <div *ngFor="let data of scorecard[property][item][details]">
+          <tr>
+            <td>{{data.specval}}</td>
+          </tr>
+        </div>
+      </div>
+    </div>
+  </div>
+</table> -->
+<!-- <div class="row">
+	<ui-carousel [infinite]="false" [fade]="false" [speed]="200">
+        <ui-carousel-item>
+          <div style="background:#2980b9" class="text">1</div>
+        </ui-carousel-item>
+        <ui-carousel-item>
+          <div style="background:#2ecc71" class="text">2</div>
+        </ui-carousel-item>
+        <ui-carousel-item>
+          <div style="background:#e74c3c" class="text">3</div>
+        </ui-carousel-item>
+        <ui-carousel-item>
+          <div style="background:#f1c40f" class="text">4</div>
+        </ui-carousel-item>
+        <ui-carousel-item>
+          <div style="background:#16a085" class="text">5</div>
+        </ui-carousel-item>
+      </ui-carousel>
+	
+</div> -->
