@@ -32,10 +32,10 @@
   </ui-carousel>
 </div> -->
 <div class="row">
-  <ui-carousel [infinite]="false" [fade]="false" [speed]="200" [height]="'1400px'" >
+  <ui-carousel [infinite]="false" [fade]="false" [speed]="200" [height]="'1000px'" >
     <div *ngFor="let item of scorecard1; let i = index; let even = even;">
       <ui-carousel-item *ngIf="even" >
-        <div class="col-md-6" style="border: 1px solid black;" [ngStyle]="MainColor(i)">
+       <!--  <div class="col-md-6" style="border: 1px solid black;" [ngStyle]="MainColor(i)">
           <h2 [ngStyle]="MainColor(i)">{{getMainKey(i)}}</h2>
           <hr>
           <div *ngFor="let details of getObjectinArray(scorecard1[i]);let di = index;" style="background-color: #fff;margin: -10px;">
@@ -53,6 +53,30 @@
           	<hr>
            <div *ngFor="let details of getObjectinArray(scorecard1[i+1]);let d = index;" style="background-color: #fff;margin: -10px;">
            	<h3 style="height: 30px;background-color: #ccc;">{{GetKey1(i,d)}}</h3>
+            <div *ngFor="let detail of details;">
+              <div *ngFor="let de of detail;" style="padding: 5px;">
+                <a href="{{de.url}}" target="_blank">{{de.specval}}</a>
+                <img src="{{de.src}}" style="float: right;">
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <div class="col-md-6" style="border: 1px solid red; height: 1000px;overflow: auto;" [ngStyle]="MainColor(i)">
+           <h2 [ngStyle]="MainColor(i)" style="border-bottom: 1px solid white;">{{getMainKey(i)}}</h2>
+            <div *ngFor="let details of getObjectinArray(scorecard1[i]);let di = index;" style="background-color: #fff;margin: -10px;">
+            <h3 style="line-height: 40px;background-color: #ccc;">{{GetKey(i,di)}}</h3>
+            <div *ngFor="let detail of details;" >
+              <div *ngFor="let de of detail;let last = last" style="padding: 5px;">
+                <a href="{{de.url}}" target="_blank">{{de.specval}}</a>
+                <img src="{{de.src}}" style="float: right;">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6" style="border: 1px solid blue;height: 1000px;overflow: auto;" [ngStyle]="MainColor1(i)">
+          <h2  [ngStyle]="MainColor1(i)" style="border-bottom: 1px solid white;">{{getMainKey1(i)}}</h2>
+            <div *ngFor="let details of getObjectinArray(scorecard1[i+1]);let d = index;" style="background-color: #fff;margin: -10px;">
+            <h3 style="line-height: 40px;background-color: #ccc;">{{GetKey1(i,d)}}</h3>
             <div *ngFor="let detail of details;">
               <div *ngFor="let de of detail;" style="padding: 5px;">
                 <a href="{{de.url}}" target="_blank">{{de.specval}}</a>
