@@ -1,6 +1,7 @@
  var UserProfileModel = require('../models/usermodel.js');
  var loginModel = UserProfileModel.loginschema;
  var userModel = UserProfileModel.userschema;
+ /*
  module.exports = {
      login: function(req, res) {
          console.log(req.body,"backend console");
@@ -19,7 +20,7 @@
                  	 return res.json({ 'success': true, 'message': 'User found', user });
                  }
              });
-            
+
          })
      },
      register: function(req, res) {
@@ -44,5 +45,6 @@
          });
 
      },
-  
+
  }
+ */

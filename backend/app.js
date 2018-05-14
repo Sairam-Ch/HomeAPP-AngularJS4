@@ -1,18 +1,37 @@
 //Dependencies
 var express = require('express');
 var app = express();
+var http = require('http');
+var path = require('path');
+var mongo_store = require("connect-mongo");
+var conf =  require('./conf.js');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
+// var mongoose = require('mongoose');
+
 
 //connect to MongoDB
-mongoose.connect('mongodb://localhost/homewebapp');
-var db = mongoose.connection;
+var MongoClient = require('mongodb').MongoClient;
+var url =conf.database.url;
+console.log("url", url);
+MongoClient.connect(url, function(err, db) {
+    if(db){
+      app.db = db;
+    }
+    else{
+      console.log("error in connecting MongoDB", err)
+    }
+});
+
+
+
+// mongoose.connect('mongodb://localhost/homewebapp');
+// var db = mongoose.connection;
 
 //handle mongo error
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-    // we're connected!
-});
+// app.db.on('error', console.error.bind(console, 'connection error:'));
+// app.db.once('open', function() {
+//     // we're connected!
+// });
 
 // parse incoming requests
 app.use(bodyParser.json());
@@ -31,19 +50,27 @@ app.use(function(req, res, next) {
     }
 });
 
-// route
-app.use('/', require('./routes/api'));
+
+
+// app.use('/', require('./routes/api'));
 
 // app.get('/', function(req, res) {
 //     res.send('Its Working');
 // });
-
 
 // app.get('/', (req,res) => {
 //   return res.end('Api working');
 // })
 
 // listen on port 3000
-app.listen(3000, function() {
-    console.log('Express app listening on port 3000');
-});
+var hostPort=Number(conf.web.port);
+
+http.createServer(app).listen(hostPort);
+
+console.log("Server Running port:"+hostPort);
+
+
+// route
+var WebRoutes = require("./routes/ui-routes.js");
+var webRoutes = new WebRoutes(app);
+webRoutes.init();
