@@ -32,7 +32,9 @@ export class LoginComponent implements OnInit {
     this.http.post(API_URL + '/login', loginData).subscribe(data => {
       console.log('data', data);
       const loginRes: any = data;
+
       if (loginRes.status) {
+        localStorage.setItem('loginResponse', JSON.stringify(loginRes));
         // console.log("true")
         this.shareData.changeMessage(loginRes.roleStatus);
         if (loginRes.roleStatus === 101) {
