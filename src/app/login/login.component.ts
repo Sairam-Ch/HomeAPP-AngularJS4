@@ -34,12 +34,19 @@ export class LoginComponent implements OnInit {
       const loginRes: any = data;
       if (loginRes.status) {
         // console.log("true")
+        this.shareData.changeMessage(loginRes.roleStatus);
         if (loginRes.roleStatus === 101) {
           this.shareData.setLogin(true);
           this.router.navigate(['./library']);
         }
-        this.shareData.setLogin(true);
-        this.router.navigate(['./agenda']);
+        else if(loginRes.roleStatus === 100) {
+          this.shareData.setLogin(true);
+          this.router.navigate(['./agenda']);
+        }
+        else {
+          this.shareData.setLogin(true);
+          this.router.navigate(['./agenda']);
+        }
       }
       else {
         alert('Please Enter Valid UserName and Password');
