@@ -32,7 +32,7 @@
   </ui-carousel>
 </div> -->
 <div class="row">
-  <ui-carousel [infinite]="false" [fade]="false" [speed]="200" [height]="'1000px'" >
+  <ui-carousel [infinite]="false" [fade]="false" [speed]="200" [height]="'850px'" >
     <div *ngFor="let item of scorecard1; let i = index; let even = even;">
       <ui-carousel-item *ngIf="even" >
        <!--  <div class="col-md-6" style="border: 1px solid black;" [ngStyle]="MainColor(i)">
@@ -62,29 +62,34 @@
           </div>
         </div> -->
         
-        <div class="col-md-6" style="border: 1px solid red; height: 1000px;overflow: auto;" [ngStyle]="MainColor(i)">
-           <h2 [ngStyle]="MainColor(i)" style="border-bottom: 1px solid white;">{{getMainKey(i)}}</h2>
-            <div *ngFor="let details of getObjectinArray(scorecard1[i]);let di = index;" style="background-color: #fff;margin: -10px;">
-            <h3 style="line-height: 40px;background-color: #ccc;padding: 5px;">{{GetKey(i,di)}}</h3>
-            <div *ngFor="let detail of details;" >
-              <div *ngFor="let de of detail;let last = last" style="padding: 5px;">
+        <div class="col-md-6" style="width: 48%;border-radius: 8px;margin: 10px;padding: 15px; height: 850px;overflow: auto;" [ngStyle]="MainColor(i)" >
+           <h2 [ngStyle]="MainColor(i)" class="header">{{getMainKey(i)}}</h2>
+           <div #colmd1>
+            <div *ngFor="let details of getObjectinArray(scorecard1[i]);let di = index;" style="background-color: #fff;margin: -12px;">
+            <h3 class="subHeader">{{GetKey(i,di)}}</h3>
+            <div *ngFor="let detail of details;" style="border-bottom: 1px solid gray;">
+              <div *ngFor="let de of detail;" style="padding: 3px;">
+                <a href="{{de.url}}" target="_blank" style="">{{de.specval}}</a>
+                <img src="{{de.src}}" style="float: right;margin-top: 15px;">
+              </div>
+     
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="col-md-6" style="width: 48%;border-radius: 8px;margin: 10px;padding: 15px; height: 850px;overflow: auto;" [ngStyle]="MainColor1(i)" #colmd2>
+          <h2  [ngStyle]="MainColor1(i)" class="header" >{{getMainKey1(i)}}</h2>
+          <div #colmd2>
+            <div *ngFor="let details of getObjectinArray(scorecard1[i+1]);let d = index;" style="background-color: #fff;margin: -12px;">
+            <h3 class="subHeader">{{GetKey1(i,d)}}</h3>
+            <div *ngFor="let detail of details;"  style="border-bottom: 1px solid gray;">
+              <div *ngFor="let de of detail;" style="padding: 3px;">
                 <a href="{{de.url}}" target="_blank">{{de.specval}}</a>
                 <img src="{{de.src}}" style="float: right;margin-top: 15px;">
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-6" style="border: 1px solid blue;height: 1000px;overflow: auto;" [ngStyle]="MainColor1(i)">
-          <h2  [ngStyle]="MainColor1(i)" style="border-bottom: 1px solid white;">{{getMainKey1(i)}}</h2>
-            <div *ngFor="let details of getObjectinArray(scorecard1[i+1]);let d = index;" style="background-color: #fff;margin: -10px;">
-            <h3 style="line-height: 40px;background-color: #ccc;padding: 5px;">{{GetKey1(i,d)}}</h3>
-            <div *ngFor="let detail of details;">
-              <div *ngFor="let de of detail;" style="padding: 5px;">
-                <a href="{{de.url}}" target="_blank">{{de.specval}}</a>
-                <img src="{{de.src}}" style="float: right;margin-top: 15px;">
-              </div>
-            </div>
-          </div>
         </div>
       </ui-carousel-item>
     </div>

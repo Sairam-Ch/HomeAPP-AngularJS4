@@ -1836,9 +1836,9 @@ fieldset {
   padding: 3%;
   overflow: hidden;
 }
-/*.ui-carousel-item{
+.ui-carousel-item{
  background: white !important;
-        }*/
+        }
         
         .arrow{
     background: red;

@@ -1,12 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { ObjectValuesPipe } from '../object-values.pipe';;
+import { Component, OnInit , ElementRef, ViewChild} from '@angular/core';
+import { ObjectValuesPipe } from '../object-values.pipe';
+declare var require: any;
+declare var $:any;
 @Component({
   selector: 'app-scorecard',
   templateUrl: './scorecard.component.html',
   styleUrls: ['./scorecard.component.css']
 })
 export class ScorecardComponent implements OnInit {
+      @ViewChild('colmd1') colmd1: ElementRef;
 
+      viewHeight: number;
   constructor() {}
   scorecard = { "Data Management and Probability": { "Collection and Organization of Data": [
             [{ "src": "assets/dot16-yellow.png" }, { "specval": "collect and organize categorical or discrete primary data and display the data in charts, tables, and graphs using many-to-one correspondence" }, { "url": "/assets/Curriculum.pdf#nameddest=Grade 3 - Collection and Organization of Data" }],
@@ -101,6 +105,12 @@ export class ScorecardComponent implements OnInit {
                // console.log(result);
                this.QuestionArr = Object.keys(this.scorecard);
                // console.log(this.QuestionArr);
+
+               
+             }
+             ngAfterViewInit(){
+               this.viewHeight = this.colmd1.nativeElement.offsetHeight;
+               console.log(this.viewHeight); 
              }
         objectKeys(obj) {
           return Object.keys(obj);
@@ -140,7 +150,7 @@ export class ScorecardComponent implements OnInit {
     // return this.colorsTemp[this.QuestionArr[i]].color;
     return  {
                 "background-color": this.colorsTemp[this.QuestionArr[i]].color,
-                "color": "white"
+                "color": "white",
             };
 
     }
@@ -149,7 +159,7 @@ export class ScorecardComponent implements OnInit {
      if(this.colorsTemp[this.QuestionArr[i+1]]){
        return  {
                 "background-color": this.colorsTemp[this.QuestionArr[i+1]].color,
-                "color": "white"
+                "color": "white",
             };  
      }
     }

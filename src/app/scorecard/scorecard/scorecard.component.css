@@ -28,20 +28,19 @@ th {
     background-color: #4CAF50;
     color: white;
 }
-.score-img-td {
-    border-bottom: 1px groove;
+.subHeader{
+    background-color: #ccc;
+    padding: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
 }
-.expectation-specific {
-    width: 90%;
-    text-align: justify !important;
-    font-size: 0.85em;
-    padding: 10px 0 10px 5px;
-    border-bottom: 1px groove;
+.header{
+    text-align: center;
+    font-size: 15px;
+    margin: 10px;
+  border-radius: 25px;
 }
-.score-img-td {
-    border-bottom: 1px groove;
-}
-.scorecardimg {
-    padding-left: 3%;
-    padding-right: 3%;
+.colmd6{
+   border-radius: 8px;margin: 10px;padding: 15px; height: 1000px;overflow: auto;
 }
