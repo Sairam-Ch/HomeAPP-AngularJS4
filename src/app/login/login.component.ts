@@ -22,8 +22,6 @@ export class LoginComponent implements OnInit {
   private password: string;
   redirect() {
     const loginData = {};
-     this.shareData.setLogin(true);
-     this.router.navigate(['./agenda']);
     this.userName = (<HTMLInputElement>document.getElementById('userName')).value;
     this.password = (<HTMLInputElement>document.getElementById('password')).value;
     // console.log(" this.userName", this.userName)
@@ -36,6 +34,15 @@ export class LoginComponent implements OnInit {
       const loginRes: any = data;
       if (loginRes.status) {
         // console.log("true")
+        if (loginRes.roleStatus === 101) {
+          this.shareData.setLogin(true);
+          this.router.navigate(['./library']);
+        }
+        this.shareData.setLogin(true);
+        this.router.navigate(['./agenda']);
+      }
+      else {
+        alert('Please Enter Valid UserName and Password');
       }
 
     });
