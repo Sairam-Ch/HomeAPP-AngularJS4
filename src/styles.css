@@ -80,7 +80,7 @@ h4 {
 input.form-control {
   border: 1px solid #ddd;
   box-shadow: none;
-  height: 35px;
+  height: 41px;
 }
 
 .bootstrap-table input.form-control {
@@ -1839,7 +1839,7 @@ fieldset {
 .ui-carousel-item{
  background: white !important;
         }
-        
+
         .arrow{
     background: red;
 }
