@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import {AdminLayoutComponent } from './layouts/admin-layout.component';
@@ -25,6 +25,8 @@ import { AuthGuard } from './service/auth.guard';
     HttpClientModule,
     BrowserModule,
     RouterModule.forRoot(AppRoutes),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [DataService,AuthGuard],
   bootstrap: [AppComponent]

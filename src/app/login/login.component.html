@@ -27,18 +27,27 @@
   <div class="row vertical-offset-100" style="margin-top: 50px;">
     <div class="col-md-4 col-md-offset-4">
       <div class="panel panel-default" style="background-color: #d3d3d3;padding: 15px;width: 115%;">
-          <h3 class="signin">Please Sign In</h3>
+        <h3 class="signin">Please Sign In</h3>
         <div class="panel-body">
-          <form>
-            <div class="form-group">
-              <input type="email" class="form-control" id="userName" placeholder="Enter email">
+          <form novalidate [formGroup]="loginForm" (ngSubmit)="LoginFormSubmit()">
+            <div class="form-group" [ngClass]="{
+      'has-error': !loginForm.get('userID').valid && loginForm.get('userID').touched,
+      'has-feedback': !loginForm.get('userID').valid && loginForm.get('userID').touched
+  }">
+              <input type="email" class="form-control" id="userName" placeholder="Enter email" formControlName="userID" required>
+              <!--  <pre>valid:{{loginForm.get('userID').valid}}</pre>
+              <pre>toucher:{{loginForm.get('userID').touched}}</pre> -->
+              <div *ngIf="!loginForm.get('userID').dirty && loginForm.get('userID').touched || loginForm.get('userID').required" class="alert alert-danger"> Username is required.</div>
             </div>
-            <div class="form-group">
-              <input type="password" class="form-control" id="password" placeholder="Password">
+            <div class="form-group" [ngClass]="{
+      'has-error': !loginForm.get('password').valid && loginForm.get('password').touched,
+      'has-feedback': !loginForm.get('password').valid && loginForm.get('password').touched}">
+              <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password" required>
+               <div *ngIf="!loginForm.get('password').dirty && loginForm.get('password').touched || loginForm.get('password').required" class="alert alert-danger"> Password is required.</div>
             </div>
-             <a class="btn btn-lg btn-block loginBtn"  (click)="redirect()">
-              <div class="glyphicon-ring"><span class="glyphicon glyphicon-ok" style="top: 4px;"></span></div>Sign In</a>
-
+            <button class="btn btn-lg btn-block loginBtn" type="submit" [disabled]="!loginForm.valid">
+              <div class="glyphicon-ring"><span class="glyphicon glyphicon-ok" style="top: 4px;"></span></div>Sign In</button>
+            <!-- <pre>{{loginForm.value | json}}</pre> -->
           </form>
         </div>
       </div>

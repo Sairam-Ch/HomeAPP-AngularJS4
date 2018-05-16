@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from '../data.service';
+import { FormGroup, FormControl, Validators,ReactiveFormsModule } from '@angular/forms';
+
 const API_URL = 'http://localhost:3002';
 @Component({
   selector: 'app-login',
@@ -11,25 +13,27 @@ const API_URL = 'http://localhost:3002';
 export class LoginComponent implements OnInit {
 
   constructor(private router: Router,private http: HttpClient,private shareData: DataService) { }
-
+  loginForm: FormGroup;
   ngOnInit() {
+    this.loginForm = new FormGroup({
+      userID: new FormControl('', [
+        Validators.required,
+        // Validators.pattern("[^ @]*@[^ @]*")
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        // Validators.minLength(8)
+      ]),
+    })
   }
-  // private loginData = {
-  //   userID:"jerry.cauley@email.com",
-  //   password:"Password1"
-  // }
-  private userName: string;
-  private password: string;
-  redirect() {
-    const loginData = {};
-    this.userName = (<HTMLInputElement>document.getElementById('userName')).value;
-    this.password = (<HTMLInputElement>document.getElementById('password')).value;
-    // console.log(" this.userName", this.userName)
-    loginData['userID'] = this.userName;
-    loginData['password'] = this.password;
-    console.log("loginData", loginData);
+ 
 
-    this.http.post(API_URL + '/login', loginData).subscribe(data => {
+  // Model Driven Form Validation
+
+  LoginFormSubmit() { 
+    if(this.loginForm.valid){
+      console.log(this.loginForm.value);
+    this.http.post(API_URL + '/login', this.loginForm.value).subscribe(data => {
       console.log('data', data);
       const loginRes: any = data;
 
@@ -53,8 +57,9 @@ export class LoginComponent implements OnInit {
       else {
         alert('Please Enter Valid UserName and Password');
       }
-
     });
+    }
+     
 
     // this.http.post(API_URL+'/login', this.loginData).subscribe(data => {
     //     var response;
