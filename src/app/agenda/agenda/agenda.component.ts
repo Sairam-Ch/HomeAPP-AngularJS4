@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 declare var require: any
 
 declare var $:any;
@@ -11,7 +11,7 @@ declare var $:any;
 })
 export class AgendaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
  events = [];
 data = [
 {
@@ -390,5 +390,9 @@ ngAfterViewInit(){
                         }
                     }
     });
+}
+
+studentPage(){
+  this.router.navigate(['./agenda/student']);  
 }
 }

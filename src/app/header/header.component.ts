@@ -67,4 +67,9 @@ export class HeaderComponent implements OnInit {
       }
         this.sendMsgEvent.emit(this.msg);
         }
+        userData;
+        userName(){
+          this.userData = JSON.parse(localStorage.getItem('loginResponse'));
+          return this.userData.data[0].firstname + ' ' + this.userData.data[0].lastname;
+        }
 }
