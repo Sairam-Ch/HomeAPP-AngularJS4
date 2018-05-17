@@ -5,6 +5,7 @@ import {_} from 'underscore';
 
 declare var $: any;
 const API_URL = 'http://localhost:3002';
+
 @Component({
   selector: 'app-assessment',
   templateUrl: './assessment.component.html',
@@ -52,7 +53,7 @@ export class AssessmentComponent implements OnInit {
   ngOnInit() {
 
 
-    console.log('00000', this.assessmentName);
+
     // this.strands = "";
     $('.datepicker').datepicker({
       minDate: 0,
@@ -85,17 +86,6 @@ export class AssessmentComponent implements OnInit {
       minTime: new Date(),
     });
     this.httpClient.post(API_URL + '/getCourseGrade', {}).subscribe(data => {
-
-        console.log(data);
-        // const element: HTMLInputElement =<HTMLInputElement>document.getElementById('hodatepickerge');
-
-        // console.log("value",value)
-
-        window.onload = () => {
-          console.log('onload');
-          var e = document.getElementsByClassName('datepicker');
-          // console.log("e",e)
-        };
         var Data: any = data;
         if (Data.status) {
           this.courseList = Data.data[0].course;
@@ -111,13 +101,11 @@ export class AssessmentComponent implements OnInit {
         console.log(err);
       });
 
-    this.httpClient.post( API_URL + '/getStrandColor', {}).subscribe(data => {
-      var colorsOfStrand = data;
-      console.log("data",colorsOfStrand.status)
+    this.httpClient.post(API_URL + '/getStrandColor', {}).subscribe(data => {
+      var colorsOfStrand: any = data;
+      // console.log("color",colorsOfStrand.data)
       if (colorsOfStrand.status) {
         this.color = colorsOfStrand.data[0];
-        console.log('clors', this.color);
-
       }
 
     });
@@ -146,8 +134,6 @@ export class AssessmentComponent implements OnInit {
 
   gradeChanged() {
     this.displayQuestionList = false;
-    console.log(this.assessment.selectedCourse, 'course');
-    console.log(this.assessment.selectedGrade, 'grade');
     let selCourse: any;
     let selGrade: any;
     selCourse = this.assessment.selectedCourse;
@@ -157,13 +143,11 @@ export class AssessmentComponent implements OnInit {
 
     // }
     this.httpClient.post(API_URL + '/getStrand', {course: selCourse, grade: selGrade}).subscribe(data => {
-        console.log('strands', data);
         var strandResp: any = data;
         if (strandResp.status) {
           this.specificID = _.pluck(strandResp.data[0].specificexpID, 'specificexpID');
           this.specificID = _.flatten(this.specificID);
           this.strandsArry = strandResp.data[0].strand;
-          console.log('000', strandResp);
           this.strandChanged();
           // this.strandsArry[0].
         } else {
@@ -176,15 +160,12 @@ export class AssessmentComponent implements OnInit {
   }
 
   onchangeToHideQuesFiled() {
-    console.log('entred');
     this.displayQuestionList = false;
   }
 
   onLimitChange(searchValue: number) {
     this.displayQuestionList = false;
     this.qLimit = searchValue;
-    console.log('Qlimit', this.qLimit);
-
   }
 
   private generalExpArry: any;
@@ -200,16 +181,15 @@ export class AssessmentComponent implements OnInit {
     if (_.isEmpty(selStrand)) {
       selStrand = '';
     }
-    console.log(this.assessment.selectedCourse, 'course');
-    console.log(this.assessment.selectedGrade, 'grade');
-    console.log('selStrand', selStrand);
-    this.httpClient.post(API_URL + '/getGeneralExp', {course: selCourse, grade: selGrade, strand: selStrand}).subscribe(data => {
+    this.httpClient.post(API_URL + '/getGeneralExp', {
+      course: selCourse,
+      grade: selGrade,
+      strand: selStrand
+    }).subscribe(data => {
       // console.log("exp",data)
       let generalExpResp: any = data;
       if (generalExpResp.status) {
         this.generalExpArry = generalExpResp.data;
-
-        console.log('generalExpArry', this.generalExpArry);
       } else {
 
       }
@@ -228,20 +208,21 @@ export class AssessmentComponent implements OnInit {
   private random: number;
   private totquestionsChunck: any;
   private totalpageCount: number;
+  private AssessNameIsEmpty: boolean;
 
   showQuestionList() {
 
 
     if (_.isEmpty(this.assessmentName)) {
       this.displayQuestionList = false;
+      this.AssessNameIsEmpty = true;
       this.assessNameValidation = 'Enter Assessment Name';
       // this.assessNameValidation =  "";
 
       // this.zone.fork().run(function() {
-      //   setTimeout(function () {
-      //     this.assessNameValidation =  "";
-      //     console.log( "@@@@@@@@",this.assessNameValidation)
-      // }, 1000);
+      setTimeout(function () {
+        this.AssessNameIsEmpty = false;
+      }.bind(this), 2500);
       // })
 
     }
@@ -267,14 +248,9 @@ export class AssessmentComponent implements OnInit {
       if (this.assessment.assessmentType === 'randomQ') {
         requestObject['limit'] = this.qLimit;
       }
-
-      console.log('requestObject ', requestObject);
       this.httpClient.post(API_URL + '/getAssessmentQuestion', requestObject).subscribe(data => {
-        console.log(data, 'ques');
         let assessQuestionListResp: any = data;
         if (assessQuestionListResp.status) {
-
-          console.log('*******', this.assessment.assessmentType);
           this.displayQuestionList = true;
           this.page = 1;
           this.assessQuesList = assessQuestionListResp.data;
@@ -301,7 +277,6 @@ export class AssessmentComponent implements OnInit {
               }
               else {
                 questionData = this.overAllSelectedQues[i];
-                console.log('this.overAllSelectedQues', this.overAllSelectedQues[i]);
                 questionData['checked'] = true;
                 this.checkedQuestions[this.overAllSelectedQues[i].strand] = {
                   name: this.overAllSelectedQues[i].strand,
@@ -311,7 +286,6 @@ export class AssessmentComponent implements OnInit {
               }
             }
           }
-          console.log('pinRequired', this.assessment.pinRequired);
           this.random = _.random(1000, 9999);
           this.totquestionsChunck = chunkArray(assessQuestionListResp.data, 10);
           if (requestObject['page'] == 0) {
@@ -319,12 +293,7 @@ export class AssessmentComponent implements OnInit {
           } else {
             this.assessQuesList = this.totquestionsChunck[requestObject['page'] - 1];
           }
-          console.log('limit', this.limit);
-          console.log('Quecount', this.assessQuesCount);
           this.totalpageCount = Math.ceil(this.assessQuesCount / 10);
-          console.log('this.totalpageCount', this.totalpageCount);
-
-
         }
         else {
           this.displayQuestionList = false;
@@ -339,8 +308,6 @@ export class AssessmentComponent implements OnInit {
     }
 
     function chunkArray(myArray, chunk_size) {
-
-      console.log('entred chunk');
       var index = 0;
       var arrayLength = myArray.length;
       var tempArray = [];
@@ -378,24 +345,17 @@ export class AssessmentComponent implements OnInit {
           var index = -1;
         }
       }
-      console.log('if');
+
     }
     else {
-      console.log('else');
       var index = -1;
-
-
     }
 
     if (index > -1) {
-      console.log('if2', index, this.indexOfQues);
-      console.log(this.checkedQuestions[ques.strand], '888');
       this.checkedQuestions[ques.strand].splice(this.indexOfQues, 1);
 
       for (var m = 0; m < this.checkedQuestions[ques.strand].data.length; m++) {
         if (this.checkedQuestions[ques.strand].data[m].questionID == ques.questionID) {
-
-          console.log('spliced ques');
           this.checkedQuestions[ques.strand].splice(m, 1);
         }
 
@@ -408,15 +368,11 @@ export class AssessmentComponent implements OnInit {
     }
     else {
       this.overAllSelectedQues.push(ques);
-      console.log(this.overAllSelectedQues);
       this.checkedQuestions['checked'] = false;
 
 
       if (this.checkedQuestions[ques.strand]) {
-        console.log('&&&', ques);
         this.checkedQuestions[ques.strand].data.push(ques);
-        console.log('*****', this.checkedQuestions);
-
       } else {
         this.checkedQuestions[ques.strand] = {
           name: ques.strand,
@@ -446,7 +402,7 @@ export class AssessmentComponent implements OnInit {
 
 
       this.checkedQuestions['checked'] = true;
-      console.log('2nd page', this.checkedQuestions);
+
 
     }
   }
@@ -505,7 +461,6 @@ export class AssessmentComponent implements OnInit {
   private end_Time: any;
 
   assignAssessment() {
-    console.log(this.checkedQuestion, 'this.checkedQuestion');
     // this.question1 =  this.checkedQuestion
 
 
@@ -514,12 +469,12 @@ export class AssessmentComponent implements OnInit {
     this.start_Time = (<HTMLInputElement>document.getElementById('startTime')).value;
     this.end_Time = (<HTMLInputElement>document.getElementById('endTime')).value;
     // const value: string = element.value;
-    console.log('e222', this.startDate);
-
-
     if (_.isEmpty(this.overAllSelectedQues)) {
       this.quesSelecValidation = 'Please select Question';
       this.DisplayConfirmDetails = false;
+      setTimeout(function () {
+        this.quesSelecValidation = '';
+      }.bind(this), 2500);
     }
     else {
       this.DisplayConfirmDetails = !this.DisplayConfirmDetails;
@@ -560,7 +515,7 @@ export class AssessmentComponent implements OnInit {
     }
   }
 
-  back() {
+  assessmentBack() {
     this.displayQuestionList = true;
     this.DisplayConfirmDetails = false;
     // this.assessmentDetails = true;
@@ -592,9 +547,8 @@ export class AssessmentComponent implements OnInit {
 
   }
 
-  cancel() {
+  assessmentCancel() {
     this.overAllSelectedQues = [];
-    console.log(' this.overAllSelectedQues', this.overAllSelectedQues);
     this.displayQuestionList = false;
     this.DisplayConfirmDetails = false;
     // this.assessmentDetails = true;
@@ -602,10 +556,11 @@ export class AssessmentComponent implements OnInit {
     this.filterSection = true;
   }
 
-  private assessmentSave: string;
+  private assessmentSaveSucc: string;
+  private assessmentSaveFail: string;
 
   saveAssessment() {
-    if (this.overAllSelectedQues) {
+    if (!_.isEmpty(this.overAllSelectedQues)) {
       var requestObject = {};
       requestObject['course'] = this.assessment.selectedCourse;
       requestObject['grade'] = this.assessment.selectedGrade;
@@ -617,37 +572,50 @@ export class AssessmentComponent implements OnInit {
       requestObject['username'] = 'ramya';
       requestObject['starttime'] = this.start_Time;
       requestObject['endtime'] = this.end_Time;
-
-      console.log('requestObject', requestObject);
       for (var j in this.overAllSelectedQues) {
         requestObject['question_id'].push({
           questionID: this.overAllSelectedQues[j].questionID
         });
       }
       this.httpClient.post(API_URL + '/createAssessment', requestObject).subscribe(data => {
-        console.log('data%%', data);
+
         let assessSaveResp: any = data;
 
         if (assessSaveResp.status) {
 
-          this.assessmentSave = 'Assessment Created Successfully';
+          this.assessmentSaveSucc = 'Assessment Created Successfully';
           setTimeout(function () {
+            this.assessmentSaveSucc = '';
             this.overAllSelectedQues = [];
             this.displayQuestionList = false;
             this.DisplayConfirmDetails = false;
             this.assesdetails = true;
             this.filterSection = true;
-          }, 500);
+            this.assessmentName = '';
+          }.bind(this), 2500);
+          // setTimeout(function () {
+          //   this.overAllSelectedQues = [];
+          //   this.displayQuestionList = false;
+          //   this.DisplayConfirmDetails = false;
+          //   this.assesdetails = true;
+          //   this.filterSection = true;
+          // }, 500);
 
 
         } else {
-          this.assessmentSave = 'OOPS please try again later';
+          this.assessmentSaveFail = 'OOPS please try again later';
+          setTimeout(function () {
+            this.assessmentSaveFail = '';
+          }.bind(this), 2500);
         }
 
       });
     }
     else {
-      this.assessmentSave = 'Please select atleast one questions to save the Assessment';
+      this.assessmentSaveFail = 'Please select atleast one questions to save the Assessment';
+      setTimeout(function () {
+        this.assessmentSaveFail = '';
+      }.bind(this), 2500);
     }
 
   }

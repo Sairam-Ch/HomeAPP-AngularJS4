@@ -183,7 +183,10 @@
           </td>
         </tr>
       </table>
-      <span >{{assessNameValidation}}</span>
+      <div *ngIf="AssessNameIsEmpty" class="assessNameErr">
+        <span >{{assessNameValidation}}</span>
+
+      </div>
       <div>
         <button (click)="showQuestionList()" class="btn btn-default pull-right list-btn btn-lg">List</button>
       </div>
@@ -211,13 +214,16 @@
           </tr>
         </table>
       </div>
-      <div>
+      <div  class="QuesSelecvalidation">
+        <span>{{quesSelecValidation}}</span>
+      </div>
+      <div class="AssignBtns">
         <button class="btn btn-default pull-right list-btn btn-lg" (click)="assignAssessment()">Assign Assessment</button>
         <button class="btn btn-default pull-right list-btn btn-lg"[disabled]="totalpageCount == 1 || (totalpageCount == page)"  (click)="next()">Next</button>
         <button class="btn btn-default pull-right list-btn btn-lg" [disabled]="page==1"  (click)="previous()" >Previous</button>
       </div>
-      <span>{{quesSelecValidation}}</span>
-      <p>Page {{page}} of {{totalpageCount}}</p>
+
+      <p class="pageNo">Page {{page}} of {{totalpageCount}}</p>
     </fieldset>
   </div>
 
@@ -310,13 +316,14 @@
         </div>
 
       </div>
-      <div>
-        <span>{{assessmentSave}}</span>
+      <div class="notify-mess-align">
+        <span class="assessmentSaveSucc">{{assessmentSaveSucc}}</span>
+        <span class="assessmentSaveFail">{{assessmentSaveFail}}</span>
       </div>
       <div>
         <button (click)="saveAssessment()" class="btn btn-default pull-right list-btn btn-lg" >Save</button>
-        <button (click)="back()" class="btn btn-default pull-right list-btn btn-lg" >Back</button>
-        <button (click)="cancel()" class="btn btn-default pull-right list-btn btn-lg">Cancel</button>
+        <button (click)="assessmentBack()" class="btn btn-default pull-right list-btn btn-lg" >Back</button>
+        <button (click)="assessmentCancel()" class="btn btn-default pull-right list-btn btn-lg">Cancel</button>
       </div>
     </div>
   </div>
