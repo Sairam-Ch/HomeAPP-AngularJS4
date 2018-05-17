@@ -20,7 +20,10 @@ constructor(private dataservice:DataService,private router: Router){
   }
 
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    console.log('checking child route access');
-    return true;
+    if(this.dataservice.getLogin()){
+       return true;
+    }
+    this.router.navigate(['/']);
+  return false;
   }
 }

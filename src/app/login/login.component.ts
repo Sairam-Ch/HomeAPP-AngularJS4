@@ -14,6 +14,9 @@ const API_URL = 'http://localhost:3002';
 export class LoginComponent implements OnInit {
 
   constructor(private router: Router, private http: HttpClient, private shareData: DataService, private zone: NgZone) {
+    if(shareData.getLogin){
+     this.router.navigate(['./agenda']);
+    }
   }
 
   loginForm: FormGroup;
