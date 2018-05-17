@@ -13,9 +13,13 @@ fieldset {
   border-image: initial;
   margin-bottom: 20px;
 }
+*{
+  font-size: 16px;
+  font-family: sans-serif;
+}
 .legendStyle {
   font-weight: bold;
-  font-size: 1.3em;
+  font-size: 1.1em;
   margin-left: 25px;
   padding-left: 5px;
   padding-right: 5px;
@@ -78,7 +82,7 @@ fieldset {
   color: #ffffff;
   background-color: #3A3A3A;
   border-radius: 4px;
-  font-size: 1.2em;
+  font-size: 1.1em;
 }
 .list-btn:hover{
   background-color: #2D89EF;
@@ -116,7 +120,7 @@ fieldset {
   font-size: 16px;
 }
 .rightBox3 {
-  width: 70%;
+  width: 80%;
   text-align: left;
   vertical-align: middle;
   border: 1px #D6D6D6 solid;
@@ -216,4 +220,24 @@ fieldset {
   font-size: 16px;
   padding-left: 4px;
 
+}
+.assessvalidationStyle{
+  position: absolute;
+  padding-top: 30px;
+  /* text-align: center; */
+  /* padding-left: 216px; */
+  padding-left: 25%;
+  font-size: 16px;
+  /* font-weight: bold; */
+  color: red;
+}
+.no-of-ques{
+  outline:none;
+  box-shadow:none;
+  text-align:center;
+  border:none !important;
+  width: 100%;
+  box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
 }

@@ -10,16 +10,16 @@
                 <tr>
                   <td class="left-sideBox col-xs-5 col-md-4">Course</td>
                   <td class="right-sideBox">
-                    <select class="select-box">
-                      <option value=""  >Math</option>
+                    <select [(ngModel)]="assessment.selectedCourse" (ngModelChange)="CourseChanged()" class="select-box">
+                      <option [value]="course" *ngFor="let course of courseList"  >{{course}}</option>
                     </select>
                   </td>
                 </tr>
                 <tr>
                   <td class="left-sideBox col-xs-5 col-md-4">Grade</td>
                   <td class="right-sideBox">
-                    <select class="select-box">
-                      <option value=""  >3</option>
+                    <select [(ngModel)]="assessment.selectedGrade" (ngModelChange)="gradeChanged()" class="select-box">
+                      <option [value]="gradeList" *ngFor="let gradeList of gradeList"  >{{gradeList}}</option>
 
                     </select>
                   </td>
@@ -27,24 +27,24 @@
                 <tr>
                   <td  class="left-sideBox col-xs-5 col-md-4">Assessment Name</td>
                   <td class="right-sideBox">
-                    <input type="text" class="input-border"  placeholder="Enter Assessment Name" >
+                    <input type="text" class="input-border" [(ngModel)]="assessmentName"  placeholder="Enter Assessment Name" >
                   </td>
                 </tr>
                 <tr>
                   <td class="left-sideBox col-xs-5 col-md-4" >Pin Required</td>
                   <td class="right-sideBox">
-                    <input class="assessCheck" type="checkbox"/><span class="assessCheckSpan"><label class="cutom-label" for="no">Yes</label></span>
+                    <input class="assessCheck" (ngModelChange)="onchangeToHideQuesFiled()" [(ngModel)]="assessment.pinRequired" type="checkbox"/><span class="assessCheckSpan"><label class="cutom-label" for="no">Yes</label></span>
                   </td>
                 </tr>
-                <tr >
+                <!-- <tr >
                   <td class="left-sideBox col-xs-5 col-md-4">Target</td>
                   <td class="right-sideBox">
                     <select class="select-box">
-                      <!--<option ng-if="noSchools" >Schools not available</option>-->
+                      <option ng-if="noSchools" >Schools not available</option>
                       <option value="">All</option>
                     </select>
                   </td>
-                </tr>
+                </tr> -->
 
 
               </table>
@@ -54,13 +54,13 @@
                 <tr>
                   <td class="left-sideBox col-xs-5 col-md-4">Start Date</td>
                   <td class="right-sideBox">
-                    <input  type="text" style="width: 91%" class="input-border datepicker">
+                    <input  type="text" style="width: 91%"  class="input-border datepicker" id="datepickerStart">
                   </td>
                 </tr>
                 <tr>
                   <td class="left-sideBox col-xs-5 col-md-4">End Date</td>
                   <td class="right-sideBox">
-                    <input  type="text" style="width: 91%" class="input-border datepicker1" >
+                    <input  type="text" style="width: 91%" class="input-border datepicker1" id="datepickerEnd" >
                   </td>
                 </tr>
                 <tr>
@@ -78,7 +78,7 @@
                 <tr>
                   <td class="left-sideBox col-xs-5 col-md-4">Type</td>
                   <td class="right-sideBox">
-                    <select class="select-box">
+                    <select [(ngModel)]="assessment.testType" (ngModelChange)="onchangeToHideQuesFiled()" class="select-box">
                       <option value="formal">Formal</option>
                       <option value="practice">Practice</option>
                     </select>
@@ -88,13 +88,13 @@
                 <tr >
                   <td class="left-sideBox col-xs-5 col-md-4" >Retest</td>
                   <td class="right-sideBox">
-                    <input class="assessCheck" type="checkbox" /><span class="assessCheckSpan"><label class="cutom-label" for="no">Yes</label></span>
+                    <input class="assessCheck" (ngModelChange)="onchangeToHideQuesFiled()" [(ngModel)]="assessment.retest" type="checkbox" /><span class="assessCheckSpan"><label class="cutom-label" for="no">Yes</label></span>
                   </td>
                 </tr>
                 <tr>
                   <td class="left-sideBox col-xs-5 col-md-4" >Show Result</td>
                   <td class="right-sideBox">
-                    <input class="assessCheck" type="checkbox"/><span class="assessCheckSpan"><label class="cutom-label"  for="no">Yes</label></span>
+                    <input class="assessCheck" (ngModelChange)="onchangeToHideQuesFiled()" [(ngModel)]="assessment.showResult" type="checkbox"/><span class="assessCheckSpan"><label class="cutom-label"  for="no">Yes</label></span>
                   </td>
                 </tr>
 
@@ -117,27 +117,33 @@
                 <tr>
                   <td class="left-sideBox col-xs-5 col-md-4">Assessment</td>
                   <td class="right-sideBox">
-                    <select class="select-box">
-                      <option value=""  >Selected Question</option>
-                      <option value=""  >Random Question</option>
-                      <option value=""  >Use Template</option>
+                    <select [(ngModel)]="assessment.assessmentType" (ngModelChange)="onchangeToHideQuesFiled()" class="select-box">
+                      <option value="selectedQ"  >Selected Question</option>
+                      <option value="randomQ"  >Random Question</option>
                     </select>
+                  </td>
+                </tr>
+                <tr *ngIf="assessment.assessmentType !== 'selectedQ'">
+                  <td class="left-sideBox col-xs-5 col-md-4">No. of questions</td>
+                  <td class="right-sideBox">
+                    <input type="number" value="3"  class="no-of-ques" min="3" [(ngModel)]="qLimit" (input)="onLimitChange($event.target.value)">
                   </td>
                 </tr>
                 <tr>
                   <td class="left-sideBox col-xs-5 col-md-4">Strands</td>
                   <td class="right-sideBox">
-                    <select class="select-box">
-                      <option value=""  >All</option>
-
+                    <select [(ngModel)]="strands" (ngModelChange)="strandChanged()" class="select-box">
+                      <option value="" >All</option>
+                      <option [value]="strand" *ngFor="let strand of strandsArry"  >{{strand}}</option>
                     </select>
                   </td>
                 </tr>
                 <tr>
                   <td  class="left-sideBox col-xs-5 col-md-4">Expectations</td>
                   <td class="right-sideBox">
-                    <select class="select-box">
-                      <option value=""  >All</option>
+                    <select [(ngModel)]="generalExp" class="select-box">
+                      <option value="" >All</option>
+                      <option [value]="generalExp" *ngFor="let generalExp of generalExpArry"  >{{generalExp}}</option>
                     </select>
                   </td>
                 </tr>
@@ -148,26 +154,27 @@
                 <tr>
                   <td class="left-sideBox col-xs-5 col-md-4">Library</td>
                   <td class="right-sideBox">
-                    <select class="select-box">
-                      <option value="">Private</option>
-                      <option value="">Public</option>
+                    <select [(ngModel)]="assessment.quesLib" (ngModelChange)="onchangeToHideQuesFiled()" class="select-box">
+                      <option value="private">Private</option>
+                      <option value="public">Public</option>
                     </select>
                   </td>
                 </tr>
                 <tr>
                   <td class="left-sideBox col-xs-5 col-md-4">Type</td>
                   <td class="right-sideBox">
-                    <select class="select-box">
-                      <option value="">Multiple Choice</option>
-                      <option value=""> Text Input</option>
-                      <option value="">Open Response</option>
+                    <select [(ngModel)]="assessment.quesType" (ngModelChange)="onchangeToHideQuesFiled()" class="select-box">
+                      <option value="">All</option>
+                      <option value="multi">Multiple Choice</option>
+                      <option value="text"> Text Input</option>
+                      <option value="open">Open Response</option>
                     </select>
                   </td>
                 </tr>
                 <tr>
                   <td class="left-sideBox col-xs-5 col-md-4" >Include Manipulatives</td>
                   <td class="right-sideBox">
-                    <input class="assessCheck" type="checkbox"/><span class="assessCheckSpan"><label class="cutom-label" for="no">Yes</label></span>
+                    <input [(ngModel)]="assessment.manipulatives" (ngModelChange)="onchangeToHideQuesFiled()" class="assessCheck" type="checkbox"/><span class="assessCheckSpan"><label class="cutom-label" for="no">Yes</label></span>
                   </td>
                 </tr>
 
@@ -176,37 +183,41 @@
           </td>
         </tr>
       </table>
+      <span >{{assessNameValidation}}</span>
       <div>
         <button (click)="showQuestionList()" class="btn btn-default pull-right list-btn btn-lg">List</button>
       </div>
     </fieldset>
   </div>
+  <span >{{noQuesAvailable}}</span>
 
   <div class="row" *ngIf="displayQuestionList" >
     <fieldset>
       <legend class="legendStyle ">Question Selections</legend>
       <div class="question-tab">
         <table >
-          <tr >
-            <td class="leftBox3" >
-              <input type="checkbox">
+          <tr *ngFor = "let question of assessQuesList">
+            <td class="leftBox3" *ngIf="assessment.assessmentType == 'selectedQ'">
+              <input type="checkbox" (click) = "selectedQuestion(question)" [(ngModel)]="question.checked">
             </td>
-            <td class="leftLabels" >QM001
+            <td class="leftLabels" >{{question.questionID}}
             </td>
             <!--<td class="middleBox3">{{question.type}}</td>-->
-            <!--<td class="middleBox3 cursor" >Text Input</td>-->
-            <td class="middleBox3 cursor" >Multiple Choice</td>
-            <!--<td class="middleBox3 cursor" >Open Response</td>-->
-            <td class="rightBox3 cursor">Add 50+5</td>
+            <td class="middleBox3 cursor" *ngIf = "question.type == 'text'">Text Input</td>
+            <td class="middleBox3 cursor"  *ngIf = "question.type == 'multi'">Multiple Choice</td>
+            <td class="middleBox3 cursor" *ngIf = "question.type == 'open'">Open Response</td>
+            <td class="rightBox3 cursor">{{question.line1}}</td>
             <td class="manipulative-box"><span ></span></td>
           </tr>
         </table>
       </div>
       <div>
         <button class="btn btn-default pull-right list-btn btn-lg" (click)="assignAssessment()">Assign Assessment</button>
-        <button class="btn btn-default pull-right list-btn btn-lg">Next</button>
-        <button class="btn btn-default pull-right list-btn btn-lg">Previous</button>
+        <button class="btn btn-default pull-right list-btn btn-lg"[disabled]="totalpageCount == 1 || (totalpageCount == page)"  (click)="next()">Next</button>
+        <button class="btn btn-default pull-right list-btn btn-lg" [disabled]="page==1"  (click)="previous()" >Previous</button>
       </div>
+      <span>{{quesSelecValidation}}</span>
+      <p>Page {{page}} of {{totalpageCount}}</p>
     </fieldset>
   </div>
 
@@ -223,19 +234,19 @@
                   <tr>
                     <td class="left-sideBox col-xs-5 col-md-4">Course</td>
                     <td class="right-sideBox notAllow" >
-                      <input  type="text" value="Math" class="notAllow select-role custom-form" readonly>
+                      <input  type="text" [(ngModel)]="assessment.selectedCourse"  class="notAllow select-role custom-form" readonly>
                     </td>
                   </tr>
                   <tr>
                     <td class="left-sideBox col-xs-5 col-md-4">Grade</td>
                     <td class="right-sideBox notAllow">
-                      <input  type="text" value="3"  class="notAllow select-role custom-form" readonly>
+                      <input  type="text" [(ngModel)]="assessment.selectedGrade"  class="notAllow select-role custom-form" readonly>
                     </td>
                   </tr>
                   <tr>
                     <td class="left-sideBox  col-xs-5 col-md-4">Assessment Name</td>
                     <td class="right-sideBox notAllow">
-                      <input  type="text"  class="notAllow select-role custom-form" readonly>
+                      <input  type="text" [(ngModel)]="assessmentName"  class="notAllow select-role custom-form" readonly>
                     </td>
                   </tr>
                 </table>
@@ -246,33 +257,33 @@
                   <tr>
                     <td class="left-sideBox  col-xs-5 col-md-4">Start Date</td>
                     <td class="right-sideBox notAllow">
-                      <input  type="text"  class="notAllow select-role custom-form" readonly>
+                      <input  type="text" [(ngModel)]="startDate" class="notAllow select-role custom-form" readonly>
                     </td>
                   </tr>
                   <tr>
                     <td class="left-sideBox  col-xs-5 col-md-4">End Date</td>
                     <td class="right-sideBox notAllow">
-                      <input  type="text"  class="notAllow select-role custom-form" readonly>
+                      <input  type="text" [(ngModel)]="endDate"  class="notAllow select-role custom-form" readonly>
                     </td>
                   </tr>
-                  <tr >
+                  <tr *ngIf="start_Time">
                     <!--ng-model="start_time"-->
                     <td class="left-sideBox  col-xs-5 col-md-4">Start Time</td>
                     <td class="right-sideBox notAllow">
-                      <input type="text" class="notAllow custom-form" readonly/>
+                      <input type="text" [(ngModel)]="start_Time" class="notAllow custom-form" readonly/>
                     </td>
                   </tr>
-                  <tr >
+                  <tr *ngIf="end_Time">
                     <td class="left-sideBox  col-xs-5 col-md-4" >End Time</td>
                     <td class="right-sideBox notAllow">
                       <!--ng-model="end_time"-->
-                      <input type="text" class="notAllow custom-form"   readonly/>
+                      <input type="text" [(ngModel)]="end_Time" class="notAllow custom-form"   readonly/>
                     </td>
                   </tr>
-                  <tr >
-                    <td class="left-sideBox  col-xs-5 col-md-4">PIN</td>
+                  <tr *ngIf="assessment.pinRequired">
+                    <td  class="left-sideBox  col-xs-5 col-md-4">PIN</td>
                     <td class="right-sideBox notAllow">
-                      <input type="text"  class="notAllow select-role custom-form" readonly>
+                      <input type="text"  class="notAllow select-role custom-form" [(ngModel)]="random" readonly>
                     </td>
                   </tr>
                 </table>
@@ -280,26 +291,30 @@
             </td>
           </tr>
         </table>
+
       </fieldset>
     </div>
 
     <div class="row">
       <p  class="assess-text"> Unselect Questions for Removal:</p>
       <div >
-        <div  style="background-color: green" class="col-xs-12 col-lg-12 asst-block"  >
+        <div  *ngFor="let checkedQuestions of getObjectinArray(checkedQuestions); "  [ngStyle] = "{'background-color':color[checkedQuestions.name].color}" class="col-xs-12 col-lg-12 asst-block"  >
           <div>
-            <div class="assm-strand-title">Measurment</div>
-            <div class=" col-xs-12 col-sm-6 col-lg-6 asst-mainblock" >
-              <div class="asst-block1"> <input class="asst-checkbox" type="checkbox" ></div>
-              <div class="col-xs-5 col-lg-2 asst-block2 cursor-pointer" >QM001</div>
-              <div class="col-xs-6 col-lg-3 asst-block3 " >Add 50+5</div>
+            <div class="assm-strand-title">{{checkedQuestions.name}}</div>
+            <div class=" col-xs-12 col-sm-6 col-lg-6 asst-mainblock" *ngFor="let checkedQuestions of checkedQuestions.data; ">
+              <div class="asst-block1"> <input class="asst-checkbox" type="checkbox"  [(ngModel)]="checkedQuestions.checked" (click)=deselectedQues(checkedQuestions)></div>
+              <div class="col-xs-5 col-lg-2 asst-block2 cursor-pointer" >{{checkedQuestions.questionID}}</div>
+              <div class="col-xs-6 col-lg-3 asst-block3 " >{{checkedQuestions.line1}}</div>
             </div>
           </div>
         </div>
 
       </div>
       <div>
-        <button class="btn btn-default pull-right list-btn btn-lg">Save</button>
+        <span>{{assessmentSave}}</span>
+      </div>
+      <div>
+        <button (click)="saveAssessment()" class="btn btn-default pull-right list-btn btn-lg" >Save</button>
         <button (click)="back()" class="btn btn-default pull-right list-btn btn-lg" >Back</button>
         <button (click)="cancel()" class="btn btn-default pull-right list-btn btn-lg">Cancel</button>
       </div>
@@ -309,46 +324,46 @@
 
 
 <!--<div id="dialog-modal-ass" title="Preview Question">-->
-  <!--<div>-->
-    <!--<div >-->
-      <!--<p >line 1</p>-->
-      <!--<p >line 2</p>-->
-    <!--</div>-->
+<!--<div>-->
+<!--<div >-->
+<!--<p >line 1</p>-->
+<!--<p >line 2</p>-->
+<!--</div>-->
 
-    <!--<div>-->
-      <!--<img style="display:block;  margin-right:auto;"  />-->
-    <!--</div>-->
+<!--<div>-->
+<!--<img style="display:block;  margin-right:auto;"  />-->
+<!--</div>-->
 
-    <!--<div >-->
-      <!--<p >Line 3</p>-->
-    <!--</div>-->
+<!--<div >-->
+<!--<p >Line 3</p>-->
+<!--</div>-->
 
-    <!--<div>-->
-      <!--<img  />-->
-    <!--</div>-->
+<!--<div>-->
+<!--<img  />-->
+<!--</div>-->
 
-    <!--<div >-->
-      <!--<p >Line 4</p>-->
-    <!--</div>-->
+<!--<div >-->
+<!--<p >Line 4</p>-->
+<!--</div>-->
 
-    <!--<div>-->
-      <!--<img style="display:block;  margin-right:auto;"  />-->
-    <!--</div>-->
+<!--<div>-->
+<!--<img style="display:block;  margin-right:auto;"  />-->
+<!--</div>-->
 
-    <!--<div >-->
-      <!--<p >Line 5</p>-->
+<!--<div >-->
+<!--<p >Line 5</p>-->
 
-      <!--<p >Line 6</p>-->
-    <!--</div>-->
+<!--<p >Line 6</p>-->
+<!--</div>-->
 
-    <!---->
+<!---->
 
 
-  <!--</div>-->
-  <!--<div ng-if="question1.board.correctanswer">-->
-    <!--<p style="font-weight: bold" class="padding-bottom-look">Correct Answer : {{question1.board.correctanswer }} </p>-->
-    <!--<img style="display:block;  margin-right:auto;" class="neoansimg" ngf-src="question1.board.correctanswerimage | imagefilter" />-->
-  <!--</div>-->
+<!--</div>-->
+<!--<div ng-if="question1.board.correctanswer">-->
+<!--<p style="font-weight: bold" class="padding-bottom-look">Correct Answer : {{question1.board.correctanswer }} </p>-->
+<!--<img style="display:block;  margin-right:auto;" class="neoansimg" ngf-src="question1.board.correctanswerimage | imagefilter" />-->
+<!--</div>-->
 <!--</div>-->
 
 
