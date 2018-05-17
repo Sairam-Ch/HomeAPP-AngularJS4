@@ -1,0 +1,67 @@
+.testTakeBlock {
+    background-color: grey;
+    border-right: 2px solid white;
+   /* width: 14%;*/
+}
+.testTakeGrade {
+    color: #fff;
+    font-size: 36px;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.testTakeClass {
+    color: #fff;
+    font-size: 73px;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center;
+    font-weight: bold;
+}
+.testTakeCourse {
+    padding: 0px;
+}
+.testTakeCourse {
+    background-color: grey;
+    border-left: 0px solid white;
+    padding: 0px;
+}
+.testTakeCourse {
+    background-color: grey;
+    border-left: 0px solid white;
+    padding: 0px;
+}
+.testTakeCourseText {
+    border-left: 0 solid white;
+    color: white;
+    font-size: 70px;
+    padding-top: 11px;
+    font-weight: bold;
+    margin-bottom: 11px;
+    padding-left: 10%;
+    text-align: start;
+}
+.detailsPadding {
+    white-space: nowrap;
+    padding-left: 15px;
+}
+.detailsPadding {
+    padding-top: 20px;
+    font-weight: bold;
+    font-size: 16px;
+}
+.cancelBtn, .continuebtn {
+    margin-top: 20px;
+    width: 120px;
+}
+.continuebtn:hover, .cancelBtn:hover {
+    background: #2D89EF !important;
+    color: white;
+}
+.btn-default {
+    background-color: #4d4d4d;
+    color: white;
+    border-color: #4d4d4d;
+}
