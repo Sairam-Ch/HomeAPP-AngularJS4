@@ -1840,6 +1840,43 @@ fieldset {
  background: white !important;
         }
 
-        .arrow{
+.arrow{
     background: red;
 }
+.ui-datepicker table{
+  background: #e6e6e6 !important;
+}
+.ui-state-default, .ui-widget-content .ui-state-default{
+  background: #cccccc;
+}
+.f>a {
+        background-color: #0055FF !important;
+        background: #cccccc url('assets/img/2.png')3% 1.2vw no-repeat !important;
+    }
+
+    .p>a {
+        background-color: #80AAFF !important;
+        background: #cccccc url('assets/img/2.png')3% 1.2vw no-repeat !important;
+    }
+
+    .e>a {
+        background-color: #FFFACD !important;
+        background: #cccccc url('assets/img/3.png')3% 1.2vw no-repeat !important;
+
+    }
+    .pf>a{
+        background-color: red !important;
+        background: #cccccc url('assets/img/4.png')3% -85% no-repeat !important;
+    }
+    .pe>a{
+        background-color: black !important;
+        background: #cccccc url('assets/img/5.png')3% -85% no-repeat !important;
+    }
+    .fe>a{
+        background-color: black !important;
+        background: #cccccc url('assets/img/6.png')3% -85% no-repeat !important;
+    }
+    .pef>a{
+        background-color: green !important;
+        background: #cccccc url('assets/img/7.png')3% -85% no-repeat !important;
+    }
