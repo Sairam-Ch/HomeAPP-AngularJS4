@@ -5,7 +5,7 @@ import { LibraryComponent } from './library/library.component';
 export const LibraryRoutes: Routes = [
     {
 
-      path: 'library',
+      path: '',
      component: LibraryComponent
     //   children: [ {
     //     path: 'agenda',
