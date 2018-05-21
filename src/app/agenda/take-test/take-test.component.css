@@ -1,0 +1,89 @@
+.neo-conttest {
+    padding: 0 14px;
+}
+.scroll {
+    padding: 0 !important;
+    overflow-y: scroll;
+    max-height: 550px;
+}
+.neo-calcui {
+    border: 1px solid #000;
+    border-radius: 0px;
+    min-height: 73vh;
+}
+.ui-bar, .ui-body {
+    position: relative;
+    padding: .4em 1em;
+    overflow: hidden;
+    display: block;
+    clear: both;
+}
+
+.neo-calcui {
+    border: 1px solid #000;
+    border-radius: 0px;
+    min-height: 73vh;
+}
+.neo-calcsec {
+    font-size: 25px;
+    padding: 10% 0;
+}
+.neo-conttest .ui-block-a {
+    width: 26%;
+     background: #e9e9e9;
+}
+.neo-conttest .ui-bar.ui-bar-a {
+    background: none;
+    border: none;
+}
+
+.ui-bar, .ui-body {
+    position: relative;
+    padding: .4em 1em;
+    overflow: hidden;
+    display: block;
+    clear: both;
+}
+.neo-calc img {
+    width: 72%;
+    padding: 10px 0;
+}
+.neo-conttest .ui-block-b {
+    width: 74%;
+     background: #e9e9e9;
+}
+.neo-conttest .ui-bar.ui-bar-a {
+    background: none;
+    border: none;
+}
+.ui-bar, .ui-body {
+    position: relative;
+    padding: .4em 1em;
+    overflow: hidden;
+    display: block;
+    clear: both;
+}
+.neo-calcsec {
+    font-size: 25px;
+    padding: 10% 0;
+}
+
+.ui-block-a {
+    clear: left;
+}
+.ui-block-a, .ui-block-b, .ui-block-c, .ui-block-d, .ui-block-e {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    float: left;
+ 
+}
+.panel-footer {
+    padding: 8px 15px;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+}
+
+.neo-footer {
+    margin-top: 15px;
+}
