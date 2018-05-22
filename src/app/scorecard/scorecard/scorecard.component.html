@@ -32,8 +32,8 @@
   </ui-carousel>
 </div> -->
 <div class="row">
-  <ui-carousel [infinite]="false" [fade]="false" [speed]="200" [height]="'850px'" >
-    <div *ngFor="let item of scorecard1; let i = index; let even = even;">
+  <ui-carousel [infinite]="false" [fade]="false" [speed]="200" [height]="'850px'" #caroselHeight >
+    <div *ngFor="let item of scorecard1; let i = index; let even = even;" >
       <ui-carousel-item *ngIf="even" >
        <!--  <div class="col-md-6" style="border: 1px solid black;" [ngStyle]="MainColor(i)">
           <h2 [ngStyle]="MainColor(i)">{{getMainKey(i)}}</h2>
@@ -62,10 +62,11 @@
           </div>
         </div> -->
         
-        <div class="col-md-6" style="width: 48%;border-radius: 8px;margin: 10px;padding: 15px; height: 850px;overflow: auto;" [ngStyle]="MainColor(i)" >
+        <div class="col-md-6" style="width: 48%;border-radius: 8px;margin: 10px;padding: 15px;overflow: auto;height: 850px;" [ngStyle]="MainColor(i)" #colmd6A >
+          <!-- [style.height.px]="firstDivheight" -->
            <h2 [ngStyle]="MainColor(i)" class="header">{{getMainKey(i)}}</h2>
-           <div #colmd1>
-            <div *ngFor="let details of getObjectinArray(scorecard1[i]);let di = index;" style="background-color: #fff;margin: -12px;">
+           <div>
+            <div *ngFor="let details of getObjectinArray(scorecard1[i]);let di = index;" style="background-color: #fff;margin: -12px;" [ngClass]="Height(colmd6A,i)" >
             <h3 class="subHeader">{{GetKey(i,di)}}</h3>
             <div *ngFor="let detail of details;" style="border-bottom: 1px solid gray;">
               <div *ngFor="let de of detail;" style="padding: 3px;">
@@ -77,10 +78,11 @@
           </div>
           </div>
         </div>
-        <div class="col-md-6" style="width: 48%;border-radius: 8px;margin: 10px;padding: 15px; height: 850px;overflow: auto;" [ngStyle]="MainColor1(i)" #colmd2>
+        <div class="col-md-6" style="width: 48%;border-radius: 8px;margin: 10px;padding: 15px;overflow: auto;height: 850px;" [ngStyle]="MainColor1(i)" #colmd6B >
+          <!-- [style.height.px]="secondDivheight" -->
           <h2  [ngStyle]="MainColor1(i)" class="header" >{{getMainKey1(i)}}</h2>
-          <div #colmd2>
-            <div *ngFor="let details of getObjectinArray(scorecard1[i+1]);let d = index;" style="background-color: #fff;margin: -12px;">
+          <div>
+            <div *ngFor="let details of getObjectinArray(scorecard1[i+1]);let d = index;" style="background-color: #fff;margin: -12px;" [ngClass]="Height1(colmd6B,i+1)" >
             <h3 class="subHeader">{{GetKey1(i,d)}}</h3>
             <div *ngFor="let detail of details;"  style="border-bottom: 1px solid gray;">
               <div *ngFor="let de of detail;" style="padding: 3px;">

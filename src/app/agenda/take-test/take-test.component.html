@@ -1,40 +1,167 @@
 <br>
 <div class="container-fluid">
-<div class="row" *ngIf="headerShow">
-	<p class="pull-right">Page {{currentPage+1}}</p>
-	</div>
-	<div class="row" *ngIf="!headerShow" style="margin: 0px;" >
-		<p class="pull-right">Page {{currentPage+1}}</p>
-	</div>
-
-    <div  style="padding: 0;" *ngIf="successCongrates">
-            <div class="neo-resultblock">
-                <div class="neo-sectitle neo-nocalcfull">
-                    <div class="resultblock">
-                        <div>
-                            <h2>Congratulations!</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="row" *ngIf="headerShow">
+    <p class="pull-right">Page {{currentPage+1}}</p>
+  </div>
+  <div class="row" *ngIf="!headerShow" style="margin: 0px;">
+    <p class="pull-right">Page {{currentPage+1}}</p>
+  </div>
+  <div style="padding: 0;" *ngIf="successCongrates">
+    <div class="neo-resultblock">
+      <div class="neo-sectitle neo-nocalcfull">
+        <div class="resultblock">
+          <div>
+            <h2>Congratulations!</h2>
+          </div>
         </div>
-         <div data-role="content" class="neo-conttest  neo-calcui scroll">
-        <div class="ui-grid-b" *ngIf="(currentPage+1)==1 && nonmanulength>0 " style=" background: #e9e9e9;">
-                <div class="ui-block-a">
-                    <div class="ui-bar ui-bar-a">
-                        <div class="neo-calc">
-                            <img class="calc_mobile" src="assets/img/no_calc.png">
-                        </div>
-                    </div>
-                </div>
-                <div class="ui-block-b">
-                    <div class="ui-bar ui-bar-a">
-                        <p class="neo-calcsec" style="color: #000;">You may not use a calculator or manipulatives for questions 1–{{non_manu.length}}.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-         <div class="neo-footer panel-footer">
-         </div>
+      </div>
     </div>
+  </div>
+  <div data-role="content" class="neo-conttest  neo-calcui scroll">
+    <div class="ui-grid-b" *ngIf="(currentPage+1)==1 && nonmanulength>0 " style=" background: #e9e9e9;">
+      <div class="ui-block-a">
+        <div class="ui-bar ui-bar-a">
+          <div class="neo-calc">
+            <img class="calc_mobile" src="assets/img/no_calc.png">
+          </div>
+        </div>
+      </div>
+      <div class="ui-block-b">
+        <div class="ui-bar ui-bar-a">
+          <p class="neo-calcsec" style="color: #000;">You may not use a calculator or manipulatives for questions 1–{{non_manu.length}}.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="ui-grid-b neo-calcfull" *ngIf="((nonmanulength==0 || nonmanCount==nonmanulength)  && manupulength>0 && stFrom!=secondSection)">
+      <div class="ui-block-a">
+        <div class="ui-bar ui-bar-a">
+          <div class="neo-calc">
+            <img class="calc_mobile" src="assets/img/calc.png">
+          </div>
+        </div>
+      </div>
+      <div class="ui-block-b">
+        <div class="ui-bar ui-bar-a">
+          <p class="neo-calcsec">You may use a calculator and/or manipulatives for {{non_manu.length+1}}-{{total_question.length}}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="ui-grid-b neo-quesmult " *ngIf="(currentPage+1)>1">
+      <div id="container">
+        <div *ngIf="stFrom!=secondSection">
+          <div *ngFor="let teacher of total_question | slice:0:2;let i = index;">{{check_index(teacher)}}
+            <div [ngClass]="{'vertical_line_mobile hrline': teacher.type =='multi' }">
+              <!-- <pre>{{teacher|json}}</pre> -->
+              <table>
+                <tbody>
+                  <tr>
+                    <td *ngIf="teacher.type =='multi'" style="vertical-align: top" class="ng-scope">
+                      <span style="position:absoute;lft: 10px;margin-right: 20px;" class="mcqQuesNo-align">{{teacher.questionno}}.</span>
+                    </td>
+                    <td>
+                      <div style="text-align:center; padding-bottom:0px;" *ngIf="teacher.type =='multi'">
+                        <p style="font-size: 15px;color: black;">&nbsp;{{ teacher.line1 }}</p>
+                        <p style="font-size: 15px;color: black;"> {{teacher.line2}}</p>
+                      </div>
+                      <div style=" margin-left: 13px;" *ngIf="teacher.type =='multi'">
+                        <p style="font-size: 15px;color: black;">{{teacher.line3}}</p>
+                      </div>
+                      <div style="margin-left: 13px;" *ngIf="teacher.type =='multi'">
+                        <p style="font-size: 15px;color: black;">{{teacher.line4}}</p>
+                      </div>
+                      <div style="text-align:center; padding-bottom:20px; margin-left: 13px;" *ngIf="teacher.type =='multi'">
+                        <p style="font-size: 15px;color: black;">{{teacher.line5 }}</p>
+                        <p style="font-size: 15px;color: black;">{{teacher.line6}}</p>
+                      </div>
+                      <br>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div *ngIf="teacher.type =='multi'">
+                <form>
+                  <div class="ui-grid-a">
+                    <div>
+                      <label>
+                        <div>
+                          <input type="radio" data-role="none" class="middel-align" render-radio name="radio-choice-1" id="radio-choice-1A{{teacher.questionno}}" value="teacher.answer1">&nbsp; {{teacher.answer1}}
+                        </div>
+                        <div style="margin-top : 4%">
+                          <!-- <img *ngIf="teacher.answerimage1 != ''" class="neoansimg" src="{{teacher.answerimage1 | imagefilter}}" /> -->
+                        </div>
+                      </label>
+                    </div>
+                    <div style="margin-left:5%;">
+                      <div >
+                        <!--   <img ng-class="{'display-img':teacher.answer1}" class="neoansimg" ng-if="teacher.answer1!=''" src="{{teacher.answerimage1 | imagefilter}}" /> -->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ui-grid-a">
+                    <div >
+                      <label>
+                        <div>
+                          <input type="radio" data-role="none" class="middel-align" render-radio name="radio-choice-1" id="radio-choice-1B{{teacher.questionno}}" value="teacher.answer2">&nbsp; {{teacher.answer2}}
+                        </div>
+                        <div style="margin-top : 4%">
+                          <!--  <img ng-if="teacher.answerimage2!='' " class="neoansimg" ng-src="{{teacher.answerimage2 | imagefilter}}" imageonload="scrollIconCheck()" /> -->
+                        </div>
+                      </label>
+                    </div>
+                    <div  style="margin-left:5%;">
+                      <div>
+                        <!-- <img ng-class="{'display-img':teacher.answer2}" class="neoansimg" ng-if="teacher.answer2!=''" ng-src="{{teacher.answerimage2 | imagefilter}}" imageonload="scrollIconCheck()" /> -->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ui-grid-a">
+                    <div >
+                      <label>
+                        <div >
+                          <input type="radio" data-role="none" class="middel-align" render-radio name="radio-choice-1" id="radio-choice-1C{{teacher.questionno}}" value="teacher.answer3">&nbsp; {{teacher.answer3}}
+                        </div>
+                        <div style="margin-top : 4%">
+                          <!--  <img ng-if="teacher.answerimage3 != '' " class="neoansimg" ng-src="{{teacher.answerimage3 | imagefilter}}" imageonload="scrollIconCheck()" /> -->
+                        </div>
+                      </label>
+                    </div>
+                    <div  style="margin-left:5%;">
+                      <div >
+                        <!--  <img ng-class="{'display-img':teacher.answer3}" class="neoansimg" ng-if="teacher.answer3!=''" ng-src="{{teacher.answerimage3 | imagefilter}}" imageonload="scrollIconCheck()" /> -->
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <label>
+                      <div >
+                        <input type="radio" data-role="none" class="middel-align" render-radio name="radio-choice-1" id="radio-choice-1D{{teacher.questionno}}" value="teacher.correctanswer">&nbsp; {{teacher.correctanswer}}
+                      </div>
+                      <div style="margin-top : 4%">
+                        <!--  <img ng-if="teacher.correctanswerimage != ''" class="neoansimg" ng-src="{{teacher.correctanswerimage | imagefilter}}" imageonload="scrollIconCheck()" /> -->
+                      </div>
+                    </label>
+                    <div  style="margin-left:5%;">
+                      <div>
+                        <!-- <img ng-class="{'display-img':teacher.correctanswer}" class="neoansimg" ng-if="teacher.correctanswer!=''" ng-src="{{teacher.correctanswerimage | imagefilter}}" imageonload="scrollIconCheck()" /> -->
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="neo-footer panel-footer">
+    <div class="row">
+      <div class="col-md-6"></div>
+      <div class="col-md-6">
+        <button class="btn btn-default btn-small pull-right" (click)="next()">Next</button>
+      </div>
+    </div>
+  </div>
+</div>

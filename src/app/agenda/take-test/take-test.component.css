@@ -87,3 +87,11 @@
 .neo-footer {
     margin-top: 15px;
 }
+
+  .vertical_line_mobile {
+        float: left;
+        width: 50%;
+        border-right: 1px solid black;
+        min-height: 73vh;
+    }
+   

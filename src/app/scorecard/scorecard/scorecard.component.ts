@@ -108,10 +108,7 @@ export class ScorecardComponent implements OnInit {
 
                
              }
-             ngAfterViewInit(){
-               this.viewHeight = this.colmd1.nativeElement.offsetHeight;
-               console.log(this.viewHeight); 
-             }
+            
         objectKeys(obj) {
           return Object.keys(obj);
           }
@@ -214,6 +211,26 @@ colorsTemp = {
  };
 
    myArray = [0, 1, 2, 3, 4, 5, 6];
-  
+ 
+  @ViewChild('height')
+  height: ElementRef;
 
+ firstDivheight;
+ secondDivheight;
+
+ heightArray:any = [];
+             Height(elment,index){
+              //this.firstDivheight = elment.offsetHeight;
+              //setTimeout(function(){ this.heightArray.push(this.firstDivheight); this.CaroselHeight();}, 500);
+              console.log(index);
+             }
+             Height1(elment,index){
+              //this.secondDivheight = elment.offsetHeight;
+              //setTimeout(function(){ this.heightArray.push(this.secondDivheight); this.CaroselHeight()}, 500);
+              console.log(index);
+             }
+             CaroselHeight(){
+               console.log(this.heightArray); 
+                 
+             }
 }
